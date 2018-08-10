@@ -1,2 +1,7 @@
 # LD42Compo
-Ludum Dare 42 game repository
+
+Technology used:  
+Unity - game engine  
+Audacity - sound editing  
+Reason - sound and music recording  
+Paint.NET - programmer art  
