@@ -1,0 +1,30 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class MenuItem : MonoBehaviour
+{
+	public Upgrade upgrade;
+
+	public TextMeshProUGUI upgradeNameText;
+	
+	// Use this for initialization
+	void OnEnable()
+	{
+		
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		
+	}
+
+	public void OnButtonPressed()
+	{
+		
+		upgrade?.OnAcquire.Invoke(FindObjectOfType<Player>());
+		Destroy(gameObject);
+	}
+}

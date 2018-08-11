@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private float _maxJumpHeight = 4f;
+    private float _maxJumpHeight = 4.5f;
     
     public float timeToJumpApex = .4f;
 

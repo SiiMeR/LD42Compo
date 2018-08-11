@@ -9,27 +9,23 @@ public class Upgrade : MonoBehaviour
     public bool isEquipped;
     public int memoryCost = 128;
     
-    public string title;
+    	
+    public string upgradeName;
     
     [TextArea(5,10)]
     public string description;
     
-    public TextMeshProUGUI titleText;
     public TextMeshProUGUI descriptionText;
-
-    // TODO upgradefactory??
 
     public OnAcquireEvent OnAcquire;
     public OnAcquireEvent UnAcquire;
     
     [SerializeField] private GameObject textPanel;
 
-    
-
     // Use this for initialization
     void Start()
     {
-        titleText.SetText(title);
+      //  titleText.SetText(title);
         descriptionText.SetText(description);
         
         
@@ -46,28 +42,30 @@ public class Upgrade : MonoBehaviour
         UnAcquire.AddListener(RemoveEffectFromPlayer);
     }
 
-    private void RemoveEffectFromPlayer(Player player)
+    public virtual void RemoveEffectFromPlayer(Player player)
     {
-        player.gameObject.GetComponent<PlayerMovement>().MaxJumpHeight -= 1.0f;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    public virtual void AddEffectToPlayer(Player player)
+    {
+    }
+    
+    public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            OnAcquire.Invoke(other.gameObject.GetComponent<Player>());
+            other.gameObject.GetComponent<Player>().upgrades.Add(this);
+            
+            textPanel.SetActive(true);
+            Time.timeScale = 0.0f;
+            StartCoroutine(WaitForKeyPress(KeyCode.Return));
+           // OnAcquire.Invoke(other.gameObject.GetComponent<Player>());
         }
     }
 
-    private void AddEffectToPlayer(Player player)
-    {
-        player.gameObject.GetComponent<PlayerMovement>().MaxJumpHeight += 1.0f;
-        textPanel.SetActive(true);
-        Time.timeScale = 0.0f;
-        StartCoroutine(WaitForKeyPress(KeyCode.Return));
-    }
 
-    private IEnumerator WaitForKeyPress(KeyCode key)
+
+    public IEnumerator WaitForKeyPress(KeyCode key)
     {
         yield return new WaitUntil(() => Input.GetKeyDown(key));
 
@@ -78,4 +76,9 @@ public class Upgrade : MonoBehaviour
     
     
 
+}
+
+public class OnAcquireEvent : UnityEvent<Player>
+{
+        
 }
