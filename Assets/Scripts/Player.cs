@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
     private PlayerMovement _playerMovement;
 
     [SerializeField] private TextMeshProUGUI _memoryValueField;
+    [SerializeField] private GameObject _upgradeModal;
+    
 
     public float FreeMemory
     {
@@ -52,6 +54,17 @@ public class Player : MonoBehaviour
     void Update()
     {
         DrainMemory();
+        CheckInteractions();
+    }
+
+    private void CheckInteractions()
+    {
+        if (Input.GetButtonDown("Fire1"))
+        {
+            _upgradeModal.SetActive(!_upgradeModal.activeInHierarchy);
+
+            Time.timeScale = _upgradeModal.activeInHierarchy ? .0f : 1f;
+        }
     }
 
     // drain based on movement
