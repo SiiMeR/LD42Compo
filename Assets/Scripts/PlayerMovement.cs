@@ -6,7 +6,20 @@ public class PlayerMovement : MonoBehaviour
 {
 
     public float minJumpHeight = 1f;
-    public float maxJumpHeight = 4f;
+
+    public float MaxJumpHeight
+    {
+        get { return _maxJumpHeight;}
+        set
+        {
+            _maxJumpHeight = value;
+            
+            CalculateGravity();
+        }
+    }
+
+    private float _maxJumpHeight = 4f;
+    
     public float timeToJumpApex = .4f;
 
     public float moveSpeed = 10;
@@ -31,15 +44,21 @@ public class PlayerMovement : MonoBehaviour
     {
 
         _controller = GetComponent<BoxController2D>();
+        
+        CalculateGravity();
 
-        var gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
+    }
+
+    void CalculateGravity()
+    {
+        var gravity = -(2 * _maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
 		
         Physics2D.gravity = new Vector3(gravity, 0, 0);
 
         _maxJumpVelocity = Mathf.Abs(gravity * timeToJumpApex);
         _minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
     }
-	
+    
     // Update is called once per frame
     void Update () {
         if (Time.timeScale > .01f)

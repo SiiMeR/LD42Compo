@@ -1,47 +1,81 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Upgrade : MonoBehaviour
 {
-	[SerializeField] private GameObject textPanel;
-	
-	public Transform sunshine;
-	public float animationAmplitude = 10f;
-	public float animationPeriod = 5f;
-	public float animationRotateSpeed = 0.5f;
-	
 
-	
-	private Vector3 startPos;
-	
-	
-	// Use this for initialization
-	void Start ()
-	{
-		startPos = transform.position;
-	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
-		sunshine.Rotate(Vector3.back, animationRotateSpeed);
-		
-		var theta = Time.timeSinceLevelLoad / animationPeriod;
-		var distance = animationAmplitude * Mathf.Sin(theta);
-		transform.position = startPos + Vector3.up * distance;
-	}
+    public bool isEquipped;
+    public int memoryCost = 128;
+    
+    public string title;
+    
+    [TextArea(5,10)]
+    public string description;
+    
+    public TextMeshProUGUI titleText;
+    public TextMeshProUGUI descriptionText;
 
-	private void OnTriggerEnter2D(Collider2D other)
-	{
-		if (other.gameObject.CompareTag("Player"))
-		{
-			AcquireItem(other.gameObject.GetComponent<Player>());
-		}
-	}
+    // TODO upgradefactory??
 
-	private void AcquireItem(Player player)
-	{
-		textPanel.SetActive(true);
-	}
+    public OnAcquireEvent OnAcquire;
+    public OnAcquireEvent UnAcquire;
+    
+    [SerializeField] private GameObject textPanel;
+
+    
+
+    // Use this for initialization
+    void Start()
+    {
+        titleText.SetText(title);
+        descriptionText.SetText(description);
+        
+        
+        if (OnAcquire == null)
+        {
+            OnAcquire = new OnAcquireEvent();
+        }
+        OnAcquire.AddListener(AddEffectToPlayer);
+
+        if (UnAcquire == null)
+        {
+            UnAcquire = new OnAcquireEvent();
+        }
+        UnAcquire.AddListener(RemoveEffectFromPlayer);
+    }
+
+    private void RemoveEffectFromPlayer(Player player)
+    {
+        player.gameObject.GetComponent<PlayerMovement>().MaxJumpHeight -= 1.0f;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            OnAcquire.Invoke(other.gameObject.GetComponent<Player>());
+        }
+    }
+
+    private void AddEffectToPlayer(Player player)
+    {
+        player.gameObject.GetComponent<PlayerMovement>().MaxJumpHeight += 1.0f;
+        textPanel.SetActive(true);
+        Time.timeScale = 0.0f;
+        StartCoroutine(WaitForKeyPress(KeyCode.Return));
+    }
+
+    private IEnumerator WaitForKeyPress(KeyCode key)
+    {
+        yield return new WaitUntil(() => Input.GetKeyDown(key));
+
+        Time.timeScale = 1.0f;
+        Destroy(gameObject);
+    }
+
+    
+    
+
 }

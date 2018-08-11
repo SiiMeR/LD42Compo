@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -8,6 +9,8 @@ public class Player : MonoBehaviour
 
     private PlayerMovement _playerMovement;
 
+    public List<Upgrade> upgrades;
+    
     [SerializeField] private TextMeshProUGUI _memoryValueField;
     [SerializeField] private GameObject _upgradeModal;
     
@@ -45,7 +48,8 @@ public class Player : MonoBehaviour
     void Start()
     {
         _playerMovement = GetComponent<PlayerMovement>();
-
+        
+        upgrades = new List<Upgrade>();
         FreeMemory = totalMemory;
         _memoryValueField.text = $"{FreeMemory} / {totalMemory} KB";
     }

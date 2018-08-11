@@ -94,7 +94,11 @@ public class CameraFollow : MonoBehaviour
 		currentLookAheadX = Mathf.SmoothDamp(currentLookAheadX, targetLookAheadX, ref smoothLookVelocityX, lookSmoothTimeX);
 
 		focusPosition += Vector2.right * currentLookAheadX;
-		
+
+		if (float.IsNaN(focusPosition.x) || float.IsNaN(focusPosition.y))
+		{
+			return;
+		}
 		transform.position = (Vector3) focusPosition + Vector3.forward * -10;
 	}
 
