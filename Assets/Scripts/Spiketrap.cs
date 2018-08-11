@@ -18,7 +18,7 @@ public class Spiketrap : MonoBehaviour {
 	{
 		if (other.gameObject.CompareTag("Player"))
 		{
-			other.gameObject.GetComponent<Player>().GameOver();
+			StartCoroutine(other.gameObject.GetComponent<Player>().GameOver());
 		}
 	}
 }

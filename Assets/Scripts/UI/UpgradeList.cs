@@ -23,7 +23,6 @@ public class UpgradeList : Singleton<UpgradeList>
 			.Where(upgrade => !upgrade.isEquipped)
 			.Select(mapUpgradeToMenuItem).ToList();
 		
-		print(items.Count);
 		if (items.Count > 0)
 		{
 			EventSystem.current.SetSelectedGameObject(items[0].gameObject);
