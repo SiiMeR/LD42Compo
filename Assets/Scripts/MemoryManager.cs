@@ -79,6 +79,23 @@ public class MemoryManager : Singleton<MemoryManager> {
 
 		return true;
 	}
+
+	// removes as many as it can upto max limit
+	public void RemoveCorruptMemory(int blocksToRemove)
+	{
+		var corruptBlocks = _images.Where(image => image.color.Equals(MEMORY_CORRUPTED)).ToList();
+
+		if (corruptBlocks.Count >= blocksToRemove)
+		{
+			corruptBlocks.Take(blocksToRemove).ToList().ForEach(block => block.color = MEMORY_FREE);
+			
+			return;
+		}
+		
+		corruptBlocks.ForEach(block => block.color = MEMORY_FREE);
+		
+
+	}
 	
 	public bool AllocateMemory(int amount)
 	{

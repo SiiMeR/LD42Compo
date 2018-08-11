@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UpgradeList : MonoBehaviour
+public class UpgradeList : Singleton<UpgradeList>
 {
 	public List<GameObject> items;
 
@@ -33,6 +33,14 @@ public class UpgradeList : MonoBehaviour
 
 	}
 
+	public void selectNextUpgrade()
+	{
+		if (items.Count > 0)
+		{
+            
+			EventSystem.current.SetSelectedGameObject(items[0].gameObject);
+		}
+	}
 	void OnDisable()
 	{
 		items.ForEach(Destroy);

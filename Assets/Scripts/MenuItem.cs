@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class MenuItem : MonoBehaviour
@@ -28,6 +29,8 @@ public class MenuItem : MonoBehaviour
 		upgrade.OnAcquire.Invoke(FindObjectOfType<Player>());
 
 		MemoryManager.Instance.AllocateMemory(upgrade.memoryCost);
+		
+		UpgradeList.Instance.selectNextUpgrade();
 		
 		Destroy(gameObject);
 	}

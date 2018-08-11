@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
         _memoryValueField.text = $"{FreeMemory} / {totalMemory} KB";
     }
 
-    private void GameOver()
+    public void GameOver()
     {
         Debug.Log("Game over");
     }
