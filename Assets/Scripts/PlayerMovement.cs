@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,15 +19,17 @@ public class PlayerMovement : MonoBehaviour
 	private float _maxJumpVelocity;
 	private float _minJumpVelocity;
 	private float _velocityXSmoothing;
-	
+
 	private Vector3 _velocity;
 	private BoxController2D _controller;
 
 	private bool _hasJumped;
 	
+	
 	// Use this for initialization
 	void Start ()
 	{
+
 		_controller = GetComponent<BoxController2D>();
 
 		var gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
@@ -41,8 +44,21 @@ public class PlayerMovement : MonoBehaviour
 	void Update () {
 		if (Time.timeScale > .01f)
 		{
+			UpdateDirection();
 			UpdateMovement();
 		}
+	}
+
+	private void UpdateDirection()
+	{
+		if (Math.Abs(_velocity.x) < float.Epsilon)
+		{
+			return;
+		}
+
+		var flipX = _velocity.x < -float.Epsilon;
+
+		GetComponent<SpriteRenderer>().flipX = flipX;
 	}
 
 	private void UpdateMovement()
