@@ -7,9 +7,9 @@ using UnityEngine.UI;
 
 public class UpgradeList : MonoBehaviour
 {
-	private List<Button> items;
+	public List<Button> items;
 	// Use this for initialization
-	void Start ()
+	void OnEnable ()
 	{
 		items = GetComponentsInChildren<Button>().ToList();
 
