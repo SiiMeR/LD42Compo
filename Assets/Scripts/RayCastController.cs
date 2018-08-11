@@ -4,9 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
 public abstract class RayCastController : MonoBehaviour {
-	
-	
-	public readonly float SKINWIDTH = .01f;
+	public const float SKINWIDTH = .015f;
 
 	public LayerMask collisionMask;
 	[HideInInspector] public Collider2D collider;
