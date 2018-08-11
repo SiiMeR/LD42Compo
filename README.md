@@ -1,7 +1,9 @@
-# LD42Compo
+# LD42 Compo entry - Running out of space
 
-Technology used:  
+Technologies used:  
 Unity - game engine  
 Audacity - sound editing  
 Reason - sound and music recording  
-Paint.NET - programmer art  
+Paint.NET - programmer art =)  
+
+Movement controller based on https://github.com/SiiMeR/BallTale  
