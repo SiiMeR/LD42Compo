@@ -23,8 +23,12 @@ public class MenuItem : MonoBehaviour
 
 	public void OnButtonPressed()
 	{
+		if (!upgrade) return;
 		
-		upgrade?.OnAcquire.Invoke(FindObjectOfType<Player>());
+		upgrade.OnAcquire.Invoke(FindObjectOfType<Player>());
+
+		MemoryManager.Instance.AllocateMemory(upgrade.memoryCost);
+		
 		Destroy(gameObject);
 	}
 }

@@ -7,7 +7,7 @@ public class Upgrade : MonoBehaviour
 {
 
     public bool isEquipped;
-    public int memoryCost = 128;
+    public int memoryCost = 64;
     
     	
     public string upgradeName;
@@ -59,7 +59,6 @@ public class Upgrade : MonoBehaviour
             textPanel.SetActive(true);
             Time.timeScale = 0.0f;
             StartCoroutine(WaitForKeyPress(KeyCode.Return));
-           // OnAcquire.Invoke(other.gameObject.GetComponent<Player>());
         }
     }
 
@@ -69,8 +68,11 @@ public class Upgrade : MonoBehaviour
     {
         yield return new WaitUntil(() => Input.GetKeyDown(key));
 
+        textPanel.SetActive(false);
         Time.timeScale = 1.0f;
-        Destroy(gameObject);
+
+        gameObject.SetActive(false);
+       // Destroy(gameObject);
     }
 
     

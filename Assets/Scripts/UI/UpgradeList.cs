@@ -14,6 +14,7 @@ public class UpgradeList : MonoBehaviour
 	public GameObject listParent;
 	
 	private Player _player;
+	
 	void OnEnable ()
 	{
 		_player = FindObjectOfType<Player>();
@@ -21,9 +22,8 @@ public class UpgradeList : MonoBehaviour
 		items = _player.upgrades
 			.Where(upgrade => !upgrade.isEquipped)
 			.Select(mapUpgradeToMenuItem).ToList();
-
 		
-		
+		print(items.Count);
 		if (items.Count > 0)
 		{
 			EventSystem.current.SetSelectedGameObject(items[0].gameObject);

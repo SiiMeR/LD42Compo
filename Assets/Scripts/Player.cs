@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float totalMemory = 1024f;
+    public int totalMemory = 1024;
     public float secondsPerMemoryDrain = 1f;
 
     private PlayerMovement _playerMovement;
@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject _upgradeModal;
     
 
-    public float FreeMemory
+    public int FreeMemory
     {
         get { return _freeMemory; }
         set
@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private float _freeMemory;
+    private int _freeMemory;
     private float _memoryDrainTimer;
 
     private void UpdateMemoryStatus()
