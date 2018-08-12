@@ -92,6 +92,8 @@ public class Player : MonoBehaviour
 
     public IEnumerator GameOver()
     {
+        AudioManager.Instance.StopAllMusic();
+        AudioManager.Instance.Play("Death");
         _playerMovement.enabled = false;
         _animatorController.SetTrigger("Die");
 
@@ -221,6 +223,11 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+        
         DrainMemory();
         CheckInteractions();
     }

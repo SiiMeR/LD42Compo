@@ -103,6 +103,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && _controller.collisions.below)
         {
+            AudioManager.Instance.Play("Jumping");
             _animatorController.SetTrigger("Jump");
             _velocity.y = _maxJumpVelocity;
             _hasJumped = true;
