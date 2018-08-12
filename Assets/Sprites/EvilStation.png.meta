@@ -6,6 +6,7 @@ TextureImporter:
     21300002: EvilStation_1
     21300004: EvilStation_2
     21300006: EvilStation_3
+    21300008: EvilStation_4
   externalObjects: {}
   serializedVersion: 6
   mipmaps:
@@ -102,7 +103,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c3c7881bcbd7b724e91c098864e59c2b
+      spriteID: b198c3dc15daf0f429257d91628a0485
       vertices: []
       indices: 
       edges: []
@@ -122,7 +123,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 945a5f4ca075516438968e343e6a962a
+      spriteID: 44bd9bf0927bbb0479095236527be51a
       vertices: []
       indices: 
       edges: []
@@ -142,7 +143,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6e5b8a7e45ce5244facf4694c27f7875
+      spriteID: 3fd23fcf52b104a4bab476ecef492a1f
       vertices: []
       indices: 
       edges: []
@@ -162,7 +163,27 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e8c1ab44f97c8864287acf1056393635
+      spriteID: 90758b76005a21845a297d8aa3caab26
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EvilStation_4
+      rect:
+        serializedVersion: 2
+        x: 515
+        y: 0
+        width: 126
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77b7b68a63b73c841adada022d93a1db
       vertices: []
       indices: 
       edges: []
