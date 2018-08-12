@@ -44,7 +44,8 @@ public class Player : MonoBehaviour
 
     private int _freeMemory;
     private float _memoryDrainTimer;
-
+    private Animator _animatorController;
+    
     private void UpdateMemoryStatus()
     {
         _memoryValueField.text = $"{FreeMemory} / {totalMemory} KB";
@@ -53,6 +54,12 @@ public class Player : MonoBehaviour
 
     public IEnumerator GameOver()
     {
+        _playerMovement.enabled = false;
+        _animatorController.SetTrigger("Die");
+
+        yield return new WaitForSeconds(_animatorController.GetCurrentAnimatorStateInfo(0).length+_animatorController.GetCurrentAnimatorStateInfo(0).normalizedTime);
+  
+        
         lastDeathScreen.GetComponent<TextMeshProUGUI>().text = $"Game over!\n" +
                                                                $"You lasted for <color=red>{Time.timeSinceLevelLoad}</color> seconds.\n" +
                                                                $"Press ESC to quit or Return to restart";
@@ -146,6 +153,7 @@ public class Player : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        _animatorController = GetComponent<Animator>();
         _playerMovement = GetComponent<PlayerMovement>();
         
         _upgradeModal.SetActive(false);

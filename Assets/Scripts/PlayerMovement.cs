@@ -37,12 +37,13 @@ public class PlayerMovement : MonoBehaviour
 
     private bool _hasJumped;
     public bool _hasMovedThisFrame;
-	
+
+    private Animator _animatorController;
 	
     // Use this for initialization
     void Start ()
     {
-
+        _animatorController = GetComponent<Animator>();
         _controller = GetComponent<BoxController2D>();
         
         CalculateGravity();
@@ -88,6 +89,7 @@ public class PlayerMovement : MonoBehaviour
         {
             _velocity.y = 0;
             _hasJumped = false;
+            _animatorController.SetTrigger("TouchGround");
         }
 		
         var input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
@@ -101,6 +103,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && _controller.collisions.below)
         {
+            _animatorController.SetTrigger("Jump");
             _velocity.y = _maxJumpVelocity;
             _hasJumped = true;
         }
@@ -120,6 +123,8 @@ public class PlayerMovement : MonoBehaviour
 		
         _velocity.y += Physics2D.gravity.x * Time.deltaTime;
 		
+        _animatorController.SetBool("Walking", _hasMovedThisFrame);
+        
         _controller.Move(_velocity * Time.deltaTime);
 		
     }
