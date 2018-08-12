@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -51,6 +52,41 @@ public class Player : MonoBehaviour
         _memoryValueField.text = $"{FreeMemory} / {totalMemory} KB";
     }
 
+    public void FadePixels()
+    {
+        var sprite = gameObject.GetComponent<SpriteRenderer>().sprite;
+        var texture = sprite.texture;
+        
+        var pixels = texture.GetPixels();
+        
+        var newarr = new Color[pixels.Length].ToList();
+        foreach (var pixel in pixels)
+        {
+
+            var npxl = pixel;
+            npxl.a = 0;
+            
+            newarr.Add(npxl);
+        }
+        
+        texture.SetPixels(newarr.ToArray());
+    }
+
+    public IEnumerator FadeOutPixel(Color32 pixel)
+    {
+        var timer = 0f;
+
+        while ((timer += Time.deltaTime) < 3.0f)
+        {
+            print(pixel.a);
+            var mat = Mathf.Lerp(1.0f, 0.0f, timer / 3.0f);
+            pixel.a = (byte) mat;
+            
+            yield    return null;
+        }
+        
+        
+    }
 
     public IEnumerator GameOver()
     {
