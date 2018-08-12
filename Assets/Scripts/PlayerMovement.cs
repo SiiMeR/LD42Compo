@@ -38,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
     private bool _hasJumped;
     public bool _hasMovedThisFrame;
 
-    private Animator _animatorController;
+    public Animator _animatorController;
 	
     // Use this for initialization
     void Start ()

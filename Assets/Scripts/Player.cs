@@ -102,7 +102,7 @@ public class Player : MonoBehaviour
 
         while ((timerItself += Time.unscaledDeltaTime) < lightradiustimer)
         {
-            Camera.main.GetComponent<FakeLighting>().MaxLightRadius = Mathf.Lerp(Camera.main.GetComponent<FakeLighting>().MaxLightRadius, 0.1f, timerItself / lightradiustimer);
+            Camera.main.GetComponent<FakeLighting>().MaxLightRadius = Mathf.Lerp(Camera.main.GetComponent<FakeLighting>().MaxLightRadius, 0.09f, timerItself / lightradiustimer);
             yield return null;
         }
         
