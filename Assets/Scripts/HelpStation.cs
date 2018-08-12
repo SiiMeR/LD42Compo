@@ -63,7 +63,9 @@ public class HelpStation : MonoBehaviour
 
 	public IEnumerator WaitForKeyPress()
 	{
-		yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+		yield return new WaitForEndOfFrame();
+
+		yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.X));
 		
 		FlipDialogue();
 	}

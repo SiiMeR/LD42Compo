@@ -17,6 +17,7 @@ public class EvilStation : MonoBehaviour
 	public TextMeshProUGUI titleText;
 	public TextMeshProUGUI descText;
 
+	public GameObject evilsign;
 	public MemoryManager memoryManager;
 	// Use this for initialization
 	void Start ()
@@ -29,6 +30,22 @@ public class EvilStation : MonoBehaviour
 	// Update is called once per frame
 	void Update () {
 		
+	}
+
+	private void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.gameObject.CompareTag("Player"))
+		{
+			if (Input.GetKeyDown(KeyCode.X))
+			{
+				FlipDialogue();
+			}
+		}
+		
+		if (other.gameObject.CompareTag("Player"))
+		{
+			evilsign.SetActive(true);
+		}
 	}
 
 	private void OnTriggerStay2D(Collider2D other)
@@ -58,9 +75,20 @@ public class EvilStation : MonoBehaviour
 
 	public IEnumerator WaitForKeyPress()
 	{
-		yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+		yield return new WaitForEndOfFrame();
+		
+		yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.X));
 		
 		FlipDialogue();
 	}
 
+
+
+	private void OnTriggerExit2D(Collider2D other)
+	{
+		if (other.gameObject.CompareTag("Player"))
+		{
+			evilsign.SetActive(false);
+		}
+	}
 }

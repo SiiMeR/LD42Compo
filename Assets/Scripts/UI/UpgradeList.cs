@@ -22,8 +22,6 @@ public class UpgradeList : Singleton<UpgradeList>
 	void OnEnable ()
 	{
 
-		
-		
 		_player = FindObjectOfType<Player>();
 
 		items = _player.upgrades
@@ -32,7 +30,7 @@ public class UpgradeList : Singleton<UpgradeList>
 		
 		if (items.Count > 0)
 		{
-			EventSystem.current.SetSelectedGameObject(items[0].gameObject);
+			EventSystem.current.SetSelectedGameObject(items[0]);
 			CheckMenuItem();
 			noItemsText.gameObject.SetActive(false);
 		}
@@ -94,38 +92,10 @@ public class UpgradeList : Singleton<UpgradeList>
 
 			if (freeSlots != null)
 			{
-				if (flashSlots != null)
-				{
-					
-					StopCoroutine(flashSlots);
-				}
-			
-				flashSlots = FlashSlots(freeSlots);
-
-				StartCoroutine(flashSlots);
+				currentMenuItem.preAllocatedMemory = freeSlots;
 			}
 		}
 	}
 
-	private IEnumerator FlashSlots(List<Image> freeSlots)
-	{
-		var timer = 0f;
 
-		var startColor = freeSlots[0].color;
-
-		while ((timer += Time.unscaledDeltaTime) < 5f)
-		{
-			freeSlots.ForEach(slot =>
-			{
-				slot.color = Color.Lerp(startColor, Color.yellow, Mathf.PingPong(Time.time, 1));
-			});
-
-			yield return null;
-		}
-		
-		freeSlots.ForEach(slot =>
-		{
-			slot.color = startColor;
-		});
-	}
 }

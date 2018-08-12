@@ -16,6 +16,7 @@ public class JumpUpgrade : Upgrade
 
 	public override void AddEffectToPlayer(Player player)
 	{
+		isEquipped = true;
 		player.gameObject.GetComponent<PlayerMovement>().MaxJumpHeight += bonusJumpHeight;
 		base.AddEffectToPlayer(player);
 	}

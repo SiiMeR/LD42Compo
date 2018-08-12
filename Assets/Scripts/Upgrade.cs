@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -58,15 +59,17 @@ public class Upgrade : MonoBehaviour
             
             textPanel.SetActive(true);
             Time.timeScale = 0.0f;
-            StartCoroutine(WaitForKeyPress(KeyCode.Return));
+            StartCoroutine(WaitForKeyPress(KeyCode.Return, KeyCode.X));
         }
     }
 
 
 
-    public IEnumerator WaitForKeyPress(KeyCode key)
+    public IEnumerator WaitForKeyPress(KeyCode key1, KeyCode key2)
     {
-        yield return new WaitUntil(() => Input.GetKeyDown(key));
+        yield return new WaitForEndOfFrame();
+
+        yield return new WaitUntil(() => Input.GetKeyDown(key1) || Input.GetKeyDown(key2));
 
         textPanel.SetActive(false);
         Time.timeScale = 1.0f;

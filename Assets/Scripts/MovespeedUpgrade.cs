@@ -14,6 +14,7 @@ public class MovespeedUpgrade : Upgrade
 	public override void AddEffectToPlayer(Player player)
 	{
 		player.GetComponent<PlayerMovement>().moveSpeed += moveSpeedBonus;
+		isEquipped = true;
 		
 	}
 }

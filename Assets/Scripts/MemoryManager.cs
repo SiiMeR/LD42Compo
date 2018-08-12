@@ -11,6 +11,8 @@ public class MemoryManager : Singleton<MemoryManager> {
 	public static readonly Color MEMORY_ALLOCATED = new Color32(82,124,108,255);
 	public static readonly Color MEMORY_CORRUPTED = new Color32(153,117,119,255);
 	public static readonly Color MEMORY_LEAKED = new Color32(8,20,30,255);
+	public static readonly Color MEMORY_PREALLOCATED = Color.yellow;
+	
 	public static readonly int   MEMORY_BLOCK_SIZE = 32;
 	
 	public List<GameObject> _memoryRows;
@@ -23,7 +25,7 @@ public class MemoryManager : Singleton<MemoryManager> {
 	public Image legendCorrupted;
 	public Image legendLeaked;
 	// Use this for initialization
-	public void Awake ()
+	public void Start ()
 	{
 		_player = FindObjectOfType<Player>();
 		_images = new List<Image>();
@@ -41,10 +43,15 @@ public class MemoryManager : Singleton<MemoryManager> {
 	// Update is called once per frame
 	void Update ()
 	{
-		UpdateLeakedMemory();
-		CheckForFaultyBlocks();
+		UpdateFreeMemory();
+
 
 		//_player.FreeMemory -= 1;
+	}
+
+	private void UpdateFreeMemory()
+	{
+		FindObjectOfType<Player>().FreeMemory = _images.Count(image => image.color == MEMORY_FREE || image.color == MEMORY_PREALLOCATED) * MEMORY_BLOCK_SIZE ;
 	}
 
 	public void CheckForFaultyBlocks()
@@ -105,6 +112,7 @@ public class MemoryManager : Singleton<MemoryManager> {
 		
 		corruptBlocks.ForEach(block => block.color = MEMORY_FREE);
 		
+		
 
 	}
 	
@@ -121,9 +129,19 @@ public class MemoryManager : Singleton<MemoryManager> {
 		
 		imgs.ForEach(block => block.color = Color.white);
 		
-		
 		return imgs;
 	}
+
+	public bool TakePreAllocatedSlots(List<Image> slots)
+	{
+		CheckForFaultyBlocks();
+		//FindObjectOfType<Player>().FreeMemory -= slots.Count * MEMORY_BLOCK_SIZE;
+		slots.ForEach(slot => slot.color = MEMORY_ALLOCATED);
+		
+		return true;
+	}
+	
+	
 	
 	public bool AllocateMemory(int amount)
 	{
@@ -141,12 +159,26 @@ public class MemoryManager : Singleton<MemoryManager> {
 			Debug.LogWarning("Not enough blocks");
 		}
 
+	//	FindObjectOfType<Player>().FreeMemory -= amount;
 		freeBlocks.Take(blocksToAllocate).ToList().ForEach(freeBlock => freeBlock.color = MEMORY_ALLOCATED);
 
 		return true;
 	}
+
+	public void LeakOneBlockOfMemory()
+	{
+		for (var i = _images.Count -1 ; i >= 0; --i)
+		{
+			var img = _images[i].color == MEMORY_FREE;
+
+			if (!img) continue;
+			
+			_images[i].color = MEMORY_LEAKED;
+			break;
+		}
+	}
 	
-	public void UpdateLeakedMemory()
+	/*public void UpdateLeakedMemory()
 	{
 		
 		var currentMemory = _player.FreeMemory;
@@ -162,5 +194,5 @@ public class MemoryManager : Singleton<MemoryManager> {
 			_images[i].color = MEMORY_LEAKED;
 		}
 
-	}
+	}*/
 }

@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     public int totalMemory = 1024;
     public float secondsPerMemoryDrain = 1f;
 
+    public int memoryDrained;
+
     private PlayerMovement _playerMovement;
 
     public List<Upgrade> upgrades;
@@ -204,7 +206,7 @@ public class Player : MonoBehaviour
     {
         _animatorController = GetComponent<Animator>();
         _playerMovement = GetComponent<PlayerMovement>();
-        
+          
         _upgradeModal.SetActive(false);
         upgrades = new List<Upgrade>();
         FreeMemory = totalMemory;
@@ -239,7 +241,14 @@ public class Player : MonoBehaviour
 
         if (!(_memoryDrainTimer > secondsPerMemoryDrain)) return;
         
-        FreeMemory -= 1;
+        //FreeMemory -= 2;
+        memoryDrained += 2;
         _memoryDrainTimer = 0;
+
+        if (memoryDrained >= 16)
+        {
+            memoryDrained = 0;
+            MemoryManager.Instance.LeakOneBlockOfMemory();
+        }
     }
 }

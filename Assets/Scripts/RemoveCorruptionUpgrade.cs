@@ -16,6 +16,7 @@ public class RemoveCorruptionUpgrade : Upgrade
     {
         MemoryManager.Instance.RemoveCorruptMemory(corruptionRemovedOnUse);
         base.AddEffectToPlayer(player);
+        isEquipped = true;
         
     }
 }

@@ -16,5 +16,6 @@ public class LightRadiusUpgrade : Upgrade
     {
         Camera.main.GetComponent<FakeLighting>().MaxLightRadius += lightRadiusBonus;
         Camera.main.GetComponent<FakeLighting>().SmallLightRadius += lightRadiusBonus;
+        isEquipped = true;
     }
 }
