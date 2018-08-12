@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,7 +23,7 @@ public class MemoryManager : Singleton<MemoryManager> {
 	public Image legendCorrupted;
 	public Image legendLeaked;
 	// Use this for initialization
-	public void Start ()
+	public void Awake ()
 	{
 		_player = FindObjectOfType<Player>();
 		_images = new List<Image>();
@@ -41,8 +42,18 @@ public class MemoryManager : Singleton<MemoryManager> {
 	void Update ()
 	{
 		UpdateLeakedMemory();
+		CheckForFaultyBlocks();
 
 		//_player.FreeMemory -= 1;
+	}
+
+	public void CheckForFaultyBlocks()
+	{
+		_images
+			.Where(image => !image.color.Equals(MEMORY_FREE) && !image.color.Equals(MEMORY_ALLOCATED) 
+			                                           && !image.color.Equals(MEMORY_CORRUPTED) && !image.color.Equals(MEMORY_LEAKED))
+			.ToList()
+			.ForEach(image => image.color = MEMORY_FREE);
 	}
 
 	// one block
@@ -72,7 +83,7 @@ public class MemoryManager : Singleton<MemoryManager> {
 
 		if (allocBlocks.Count < blocksToFree)
 		{
-			return false;
+			Debug.LogWarning("Not enough blocks");
 		}
 		
 		allocBlocks.Take(blocksToFree).ToList().ForEach(freeBlock => freeBlock.color = MEMORY_FREE);
@@ -97,6 +108,23 @@ public class MemoryManager : Singleton<MemoryManager> {
 
 	}
 	
+	// promise to not use them :)
+	public List<Image> SelectForAllocation(int amountOfBlocks)
+	{
+		CheckForFaultyBlocks();
+			
+		var freeBlocks = _images.Where(image => image.color.Equals(MEMORY_FREE)).ToList();
+		
+		if (freeBlocks.Count() < amountOfBlocks) return null;
+		
+		var imgs = freeBlocks.Take(amountOfBlocks).ToList();
+		
+		imgs.ForEach(block => block.color = Color.white);
+		
+		
+		return imgs;
+	}
+	
 	public bool AllocateMemory(int amount)
 	{
 		if (amount < 32)
@@ -110,7 +138,7 @@ public class MemoryManager : Singleton<MemoryManager> {
 		
 		if (freeBlocks.Count < blocksToAllocate)
 		{
-			return false;
+			Debug.LogWarning("Not enough blocks");
 		}
 
 		freeBlocks.Take(blocksToAllocate).ToList().ForEach(freeBlock => freeBlock.color = MEMORY_ALLOCATED);
