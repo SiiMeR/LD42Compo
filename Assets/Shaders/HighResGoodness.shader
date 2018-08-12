@@ -78,16 +78,8 @@ Shader "Unlit/HighResGoodness"
                    return float4(highRes.rgb * lowRes.a, lowRes.a);
                 }
                 
-               // fixed3 col = lerp(highRes.rgb, lowRes.rgb, maxalpha);
-                //return highRes * lowRes.r;
-                
-                if(doTransition == 1){
-              //      return float4(highRes.rgb * lowRes.rgb ,maxalpha);
-                }
-                    
                 return highRes * lowRes.r;
                 
-              //  return float4(col, maxalpha);
 
 
 

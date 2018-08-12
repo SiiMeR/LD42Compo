@@ -61,8 +61,8 @@ public class AudioManager : Singleton<AudioManager>
             sourcePool.Add(audioSource);
         }
         
-        SetMusicVolume(PlayerPrefs.GetInt("MusicVolume") / 10f);
-        SetSoundVolume(PlayerPrefs.GetInt("SoundVolume") / 10f);
+    //    SetMusicVolume(PlayerPrefs.GetInt("MusicVolume") / 10f);
+     //   SetSoundVolume(PlayerPrefs.GetInt("SoundVolume") / 10f);
 
     }
     void Awake()

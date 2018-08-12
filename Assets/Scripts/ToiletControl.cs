@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ToiletControl : MonoBehaviour
 {
 
-
+	public TextMeshProUGUI title;
+	public TextMeshProUGUI author;
+	public TextMeshProUGUI exit;
+	
+	
 	public TextMeshProUGUI text;
 
 	public Animator animator;
@@ -41,6 +46,9 @@ public class ToiletControl : MonoBehaviour
 	public IEnumerator Ignition()
 	{
 		text.text = "";
+
+		//AudioManager.Instance.FadeToNextMusic("02Departure", 8f);
+
 		
 		var pos = new Vector2(7f, 83.75f);
 
@@ -127,7 +135,51 @@ public class ToiletControl : MonoBehaviour
 
 			yield return null;
 		}
+
+		timer = 0;
+
+		while ((timer += Time.unscaledDeltaTime) < 5f)
+		{
+			var c = title.color;
+			c.a =  Mathf.Lerp(0f, 1f, timer / 5f);
+			title.color = c;
+			yield return null;
+		}
+
+		timer = 0;
+		while ((timer += Time.unscaledDeltaTime) < 5f)
+		{
+			var c = author.color;
+			c.a =  Mathf.Lerp(0f, 1f, timer / 5f);
+			author.color = c;
+			yield return null;
+		}
+		
+		yield return new WaitForSeconds(2.0f);
+		
+		timer = 0;
+		while ((timer += Time.unscaledDeltaTime) < 5f)
+		{
+			var c = author.color;
+			c.a =  Mathf.Lerp(1f, 0f, timer / 5f);
+			author.color = c;
+			yield return null;
+		}
 			
+		
+		timer = 0;
+		while ((timer += Time.unscaledDeltaTime) < 5f)
+		{
+			var c = exit.color;
+			c.a =  Mathf.Lerp(0f,1f, timer / 5f);
+			exit.color = c;
+			yield return null;
+		}
+
+
+		yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Escape));
+		
+		Application.Quit();
 
 	}
 

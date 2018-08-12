@@ -204,6 +204,8 @@ public class Player : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        AudioManager.Instance.Play("01LastRobot", 1F, true);
+        
         Behaviour beh = FindObjectOfType<Player>().GetComponent("Halo") as Behaviour;
         beh.enabled = true;
         

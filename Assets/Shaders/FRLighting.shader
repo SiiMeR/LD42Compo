@@ -57,9 +57,9 @@ Shader "Unlit/FRLighting"
 			{
 			
 
-	          float2 scrPos = i.screenPos.xy;
-			   
-			    float2 pt = float2(0.5,0.5);
+	          float2 scrPos = i.screenPos.xy ;
+	          
+			    float2 pt = float2(0.5 ,0.5);
 			   
 			   float dist = distance(pt,scrPos);
 			   

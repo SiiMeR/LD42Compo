@@ -19,6 +19,9 @@ public class RemoveDarkness : MonoBehaviour {
 		if (other.gameObject.CompareTag("Player"))
 		{
 			Camera.main.GetComponent<FakeLighting>().FadeOutDarkness();
+			
+			AudioManager.Instance.StopAllMusic();
+			AudioManager.Instance.Play("02Departure", 1f, true);
 		}
 	}
 }
