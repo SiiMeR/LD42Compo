@@ -38,6 +38,8 @@ Shader "Unlit/FRLighting"
 			sampler2D _MainTex;
 			float4 _MainTex_ST;
 			float4 _MainTex_TexelSize;
+			float MaxLightRadius;
+			float SmallLightRadius;
 			uniform sampler2D LowResDarkness;
 			
             v2f vert (appdata v)
@@ -62,12 +64,12 @@ Shader "Unlit/FRLighting"
 			   float dist = distance(pt,scrPos);
 			   
 			   
-			   if(dist > 0.30){
+			   if(dist > (_SinTime.w / 100) + MaxLightRadius){
 			        float4 blk = float4(0,0,0,0.8);
 			   
 			        return blk;
 			   }
-			   if(dist > 0.25){
+			   if(dist > (_SinTime.w / 100) + SmallLightRadius){
 			   		float4 gr = float4(0,0,0,0.4);
 			   
 			        return gr;

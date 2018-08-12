@@ -93,7 +93,20 @@ public class Player : MonoBehaviour
         _playerMovement.enabled = false;
         _animatorController.SetTrigger("Die");
 
-        yield return new WaitForSeconds(_animatorController.GetCurrentAnimatorStateInfo(0).length+_animatorController.GetCurrentAnimatorStateInfo(0).normalizedTime);
+        var lightradiustimer = _animatorController.GetCurrentAnimatorStateInfo(0).length +
+                               _animatorController.GetCurrentAnimatorStateInfo(0).normalizedTime + 2.5f;
+
+        var timerItself = 0f;
+
+        while ((timerItself += Time.unscaledDeltaTime) < lightradiustimer)
+        {
+            Camera.main.GetComponent<FakeLighting>().MaxLightRadius = Mathf.Lerp(Camera.main.GetComponent<FakeLighting>().MaxLightRadius, 0.1f, timerItself / lightradiustimer);
+            yield return null;
+        }
+        
+        
+        
+     //   yield return new WaitForSeconds(_animatorController.GetCurrentAnimatorStateInfo(0).length+_animatorController.GetCurrentAnimatorStateInfo(0).normalizedTime);
   
         
         lastDeathScreen.GetComponent<TextMeshProUGUI>().text = $"Game over!\n" +

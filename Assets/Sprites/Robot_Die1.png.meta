@@ -17,6 +17,7 @@ TextureImporter:
     21300024: Robot_Die1_12
     21300026: Robot_Die1_13
     21300028: Robot_Die1_7
+    21300030: Robot_Die1_9
   externalObjects: {}
   serializedVersion: 6
   mipmaps:
@@ -113,7 +114,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f76334fa6a0eb9f418fd4ace99b12813
+      spriteID: 8224e73d862a9a04da997a0fa0ab4ff2
       vertices: []
       indices: 
       edges: []
@@ -124,7 +125,7 @@ TextureImporter:
         serializedVersion: 2
         x: 36
         y: 0
-        width: 26
+        width: 25
         height: 49
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -133,7 +134,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 799b3a52de0bff04f89a5b39d4c4a1fb
+      spriteID: 7de8747dc0ccec74e8944f19b9b20543
       vertices: []
       indices: 
       edges: []
@@ -144,7 +145,7 @@ TextureImporter:
         serializedVersion: 2
         x: 63
         y: 0
-        width: 30
+        width: 29
         height: 49
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -153,7 +154,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 43bad1fc066ba8b468c86341940e5f43
+      spriteID: 025b49dbad72843499f32dc00ebe31d5
       vertices: []
       indices: 
       edges: []
@@ -162,9 +163,9 @@ TextureImporter:
       name: Robot_Die1_3
       rect:
         serializedVersion: 2
-        x: 106
+        x: 108
         y: 0
-        width: 39
+        width: 36
         height: 49
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -173,7 +174,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a6933e9858ddcc941a0aa011a7762ed0
+      spriteID: e49fabf516db61f45a790a53329c00e1
       vertices: []
       indices: 
       edges: []
@@ -193,7 +194,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e4cef24803bf917429caa156570cb5e6
+      spriteID: 51936262fc8d22d45a28c3bacb1cfe28
       vertices: []
       indices: 
       edges: []
@@ -202,7 +203,7 @@ TextureImporter:
       name: Robot_Die1_5
       rect:
         serializedVersion: 2
-        x: 225
+        x: 230
         y: 0
         width: 63
         height: 49
@@ -213,7 +214,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 63be8be539b609b44ae36afcec67bc81
+      spriteID: 5516447987562674f8ed61bac4f46131
       vertices: []
       indices: 
       edges: []
@@ -233,7 +234,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5f4f66546d3d74845a38bf4925b360d9
+      spriteID: d05398d72eeb0d24e9e604b9ababe74d
       vertices: []
       indices: 
       edges: []
@@ -244,7 +245,7 @@ TextureImporter:
         serializedVersion: 2
         x: 402
         y: 0
-        width: 94
+        width: 101
         height: 49
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -253,7 +254,47 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4417b235a48d41c48b1966715c639614
+      spriteID: a61b789966bae4b488f25dea32abecad
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Robot_Die1_8
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 0
+        width: 54
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6d2da646ffd8814db38aae04ff17e08
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Robot_Die1_9
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 0
+        width: 48
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64bbac32076e0844eabdc3e35c80c6e6
       vertices: []
       indices: 
       edges: []

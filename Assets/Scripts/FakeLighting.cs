@@ -9,6 +9,9 @@ public class FakeLighting : MonoBehaviour
 
 	public Material shaderMaterial;
 	public Material higherResShaderMaterial;
+
+	public float MaxLightRadius = 0.31f;
+	public float SmallLightRadius = 0.27f;
 	
 	// Use this for initialization
 	void Start () {
@@ -29,14 +32,19 @@ public class FakeLighting : MonoBehaviour
 		RenderTexture highResGamePlay = RenderTexture.GetTemporary(src.width, src.height, 0 , RenderTextureFormat.ARGB32);
 		
 		Graphics.Blit(src, highResGamePlay);
-
+			
+		shaderMaterial.SetFloat("MaxLightRadius", MaxLightRadius);
+		shaderMaterial.SetFloat("SmallLightRadius", SmallLightRadius);
 
 		Graphics.Blit(src, rt,shaderMaterial);
+		
 		
 		higherResShaderMaterial.SetTexture("highResGamePlay", highResGamePlay);
 		higherResShaderMaterial.SetTexture("LowResDarkness", rt);
 		
 		Graphics.Blit(src, dest, higherResShaderMaterial);
+		
 		RenderTexture.ReleaseTemporary(rt);
+		RenderTexture.ReleaseTemporary(highResGamePlay);
 	}
 }
