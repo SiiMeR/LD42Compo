@@ -25,7 +25,7 @@ public class MemoryManager : Singleton<MemoryManager> {
 	public Image legendCorrupted;
 	public Image legendLeaked;
 	// Use this for initialization
-	public void Start ()
+	public void OnEnable ()
 	{
 		_player = FindObjectOfType<Player>();
 		_images = new List<Image>();

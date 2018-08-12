@@ -39,6 +39,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 						return _instance;
 					}
  
+					
 					if (_instance == null)
 					{
 						GameObject singleton = new GameObject();

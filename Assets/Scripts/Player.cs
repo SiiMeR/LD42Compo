@@ -204,6 +204,9 @@ public class Player : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        Behaviour beh = FindObjectOfType<Player>().GetComponent("Halo") as Behaviour;
+        beh.enabled = true;
+        
         _animatorController = GetComponent<Animator>();
         _playerMovement = GetComponent<PlayerMovement>();
           

@@ -29,6 +29,8 @@ Shader "Unlit/HighResGoodness"
 
             uniform sampler2D LowResDarkness;
             uniform sampler2D highResGamePlay;
+            uniform float maxalpha;
+            uniform int doTransition;
             struct appdata
             {
                 float4 vertex : POSITION;
@@ -70,11 +72,22 @@ Shader "Unlit/HighResGoodness"
 			   float4 highRes = tex2D(highResGamePlay, i.uv);
 
 			   float4 lowRes = tex2D(LowResDarkness, i.uv);
-
-                if(lowRes.a == 0.4){
-                    return float4(highRes.rgb * lowRes.a, lowRes.a);
+            
+                
+                if(lowRes.a == maxalpha){
+                   return float4(highRes.rgb * lowRes.a, lowRes.a);
                 }
-                return highRes * lowRes;
+                
+               // fixed3 col = lerp(highRes.rgb, lowRes.rgb, maxalpha);
+                //return highRes * lowRes.r;
+                
+                if(doTransition == 1){
+              //      return float4(highRes.rgb * lowRes.rgb ,maxalpha);
+                }
+                    
+                return highRes * lowRes.r;
+                
+              //  return float4(col, maxalpha);
 
 
 

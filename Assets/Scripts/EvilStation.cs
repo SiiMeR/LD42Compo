@@ -18,7 +18,6 @@ public class EvilStation : MonoBehaviour
 	public TextMeshProUGUI descText;
 
 	public GameObject evilsign;
-	public MemoryManager memoryManager;
 	// Use this for initialization
 	void Start ()
 	{
@@ -66,7 +65,7 @@ public class EvilStation : MonoBehaviour
 
 		if (evilModal.activeInHierarchy)
 		{
-			memoryManager.CorruptMemory();
+			MemoryManager.Instance.CorruptMemory();
 			StartCoroutine(WaitForKeyPress());
 		}
 		
