@@ -148,6 +148,7 @@ public class Player : MonoBehaviour
     {
         _playerMovement = GetComponent<PlayerMovement>();
         
+        _upgradeModal.SetActive(false);
         upgrades = new List<Upgrade>();
         FreeMemory = totalMemory;
         _memoryValueField.text = $"{FreeMemory} / {totalMemory} KB";

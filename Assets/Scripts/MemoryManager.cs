@@ -14,7 +14,7 @@ public class MemoryManager : Singleton<MemoryManager> {
 	
 	public List<GameObject> _memoryRows;
 
-	private List<Image> _images;
+	public  List<Image> _images;
 	private Player _player;
 	
 	public Image legendFree;
@@ -22,7 +22,7 @@ public class MemoryManager : Singleton<MemoryManager> {
 	public Image legendCorrupted;
 	public Image legendLeaked;
 	// Use this for initialization
-	void Start ()
+	public void Start ()
 	{
 		_player = FindObjectOfType<Player>();
 		_images = new List<Image>();
