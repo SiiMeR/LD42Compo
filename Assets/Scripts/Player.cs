@@ -95,6 +95,7 @@ public class Player : MonoBehaviour
         AudioManager.Instance.StopAllMusic();
         AudioManager.Instance.Play("Death");
         _playerMovement.enabled = false;
+        GetComponent<BoxCollider2D>().enabled = false;
         _animatorController.SetTrigger("Die");
 
         var lightradiustimer = _animatorController.GetCurrentAnimatorStateInfo(0).length +
@@ -117,7 +118,7 @@ public class Player : MonoBehaviour
                                                                $"You lasted for <color=red>{Mathf.Round(Time.timeSinceLevelLoad * 100) / 100.0}</color> seconds.\n" +
                                                                $"Press ESC to quit or Return to restart";
         
-        Time.timeScale = 0f;
+        
         var timer = 0f;
 
         while ((timer += Time.unscaledDeltaTime) < FADETIME)
