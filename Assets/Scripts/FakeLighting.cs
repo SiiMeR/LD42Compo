@@ -15,6 +15,8 @@ public class FakeLighting : MonoBehaviour
 	public float maxalpha = 0.4f;
 
 	public int doTransition = 0;
+
+	public Player player;
 	// Use this for initialization
 	void Start ()
 	{
@@ -28,6 +30,27 @@ public class FakeLighting : MonoBehaviour
 
 	private void OnRenderImage(RenderTexture src, RenderTexture dest)
 	{
+		
+	/*	RenderTexture rt = RenderTexture.GetTemporary(src.width / 16, src.height / 16, 0,RenderTextureFormat.ARGB32);
+		rt.filterMode = FilterMode.Point;
+
+		Vector4 vl = Camera.main.WorldToViewportPoint(player.transform.position);
+
+		vl.z = MaxLightRadius;
+		vl.w = SmallLightRadius;
+		
+		shaderMaterial.SetVector("Player", vl);
+
+		shaderMaterial.SetFloat("MaxLightRadius", MaxLightRadius);
+		shaderMaterial.SetFloat("SmallLightRadius", SmallLightRadius);
+
+		Graphics.Blit(src, rt,shaderMaterial);
+		
+		shaderMaterial.SetTexture("LowResDarkness", rt);
+		
+		Graphics.Blit(src, dest, shaderMaterial);
+
+		RenderTexture.ReleaseTemporary(rt);*/
 		
 		RenderTexture rt = RenderTexture.GetTemporary(src.width / 16, src.height / 16, 0,RenderTextureFormat.ARGB32);
 		rt.filterMode = FilterMode.Point;

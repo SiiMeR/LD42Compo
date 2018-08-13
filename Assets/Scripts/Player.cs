@@ -114,7 +114,7 @@ public class Player : MonoBehaviour
   
         
         lastDeathScreen.GetComponent<TextMeshProUGUI>().text = $"Game over!\n" +
-                                                               $"You lasted for <color=red>{Time.timeSinceLevelLoad}</color> seconds.\n" +
+                                                               $"You lasted for <color=red>{Mathf.Round(Time.timeSinceLevelLoad * 100) / 100.0}</color> seconds.\n" +
                                                                $"Press ESC to quit or Return to restart";
         
         Time.timeScale = 0f;

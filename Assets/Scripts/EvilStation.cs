@@ -65,7 +65,7 @@ public class EvilStation : MonoBehaviour
 
 		if (evilModal.activeInHierarchy)
 		{
-			MemoryManager.Instance.CorruptMemory();
+			
 			StartCoroutine(WaitForKeyPress());
 		}
 		
@@ -74,9 +74,10 @@ public class EvilStation : MonoBehaviour
 
 	public IEnumerator WaitForKeyPress()
 	{
-		yield return new WaitForEndOfFrame();
+
+		MemoryManager.Instance.CorruptMemory();
 		
-		yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.X));
+		yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
 		
 		FlipDialogue();
 	}

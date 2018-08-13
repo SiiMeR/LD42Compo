@@ -60,16 +60,15 @@ public class HelpStation : MonoBehaviour
 		
 		
 	}
-
 	public IEnumerator WaitForKeyPress()
 	{
-		yield return new WaitForEndOfFrame();
+//		yield return new WaitForEndOfFrame();
 
-		yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.X));
+		yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return) );
 		
 		FlipDialogue();
 	}
-
+	
 	private void OnTriggerEnter2D(Collider2D other)
 	{
 		if (other.gameObject.CompareTag("Player"))

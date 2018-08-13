@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 
+    
     public float minJumpHeight = 1f;
 
     public float MaxJumpHeight
