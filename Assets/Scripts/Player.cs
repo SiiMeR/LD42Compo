@@ -24,6 +24,8 @@ public class Player : MonoBehaviour
     public GameObject deathReturnToContd;
     public GameObject lastDeathScreen;
 
+    public TextMeshProUGUI restartDeathScreen;
+
 
     [SerializeField] private TextMeshProUGUI _memoryValueField;
     [SerializeField] private GameObject _upgradeModal;
@@ -92,6 +94,7 @@ public class Player : MonoBehaviour
 
     public IEnumerator GameOver()
     {
+        StartCoroutine(WaitForF1());
         AudioManager.Instance.StopAllMusic();
         AudioManager.Instance.Play("Death");
         _playerMovement.enabled = false;
@@ -170,7 +173,17 @@ public class Player : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    
+    private IEnumerator WaitForF1()
+    {
+        yield return new WaitForSeconds(4.5f);
+        yield return StartCoroutine(FadeIn(restartDeathScreen));
+        
+        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.F1));
+        Time.timeScale = 1.0f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+
     public IEnumerator FadeIn(TextMeshProUGUI text)
     {
         var timer = 0f;
